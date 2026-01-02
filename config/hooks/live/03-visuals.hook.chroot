@@ -1,0 +1,33 @@
+#!/bin/sh
+# Permisos Wallpaper
+chmod 644 /usr/share/backgrounds/noriva-background.png
+
+# Boot Splash (Plymouth) - Usando watermark.png
+plymouth-set-default-theme -R spinner
+IMG="/usr/share/noriva/branding/watermark.png"
+THEME="/usr/share/plymouth/themes/spinner"
+if [ -f "$IMG" ] && [ -d "$THEME" ]; then
+    cp -f "$IMG" "$THEME/watermark.png"
+    cp -f "$IMG" "$THEME/debian-logo.png"
+    update-initramfs -u
+fi
+
+# Configurar Calamares Settings
+sed -i 's/branding: *default/branding: noriva/g' /etc/calamares/settings.conf
+
+# Poner icono Calamares en escritorio del usuario
+mkdir -p /etc/skel/Desktop
+cp /usr/share/applications/install-noriva.desktop /etc/skel/Desktop/
+chmod +x /etc/skel/Desktop/install-noriva.desktop
+
+# Avatar de Usuario (Usa tu logo.svg)
+FACE="/usr/share/noriva/branding/logo.svg"
+if [ -f "$FACE" ]; then
+    cp "$FACE" /etc/skel/.face
+    cp "$FACE" /etc/skel/.face.icon
+    chmod 644 /etc/skel/.face
+    mkdir -p /var/lib/AccountsService/icons
+    cp "$FACE" /var/lib/AccountsService/icons/noriva
+    mkdir -p /var/lib/AccountsService/users
+    echo "[User]\nXSession=xfce\nIcon=/var/lib/AccountsService/icons/noriva\nSystemAccount=false" > /var/lib/AccountsService/users/noriva
+fi

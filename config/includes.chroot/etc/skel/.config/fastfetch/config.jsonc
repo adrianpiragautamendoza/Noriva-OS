@@ -1,0 +1,10 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": { 
+        "source": "/usr/share/noriva/branding/logo.ascii", 
+        "type": "file",
+        "padding": { "top": 2, "left": 2, "right": 4 }
+    },
+    "display": { "color": "blue" },
+    "modules": [ "title", "break", "os", "kernel", "packages", "shell", "wm", "memory", "break", "colors" ]
+}

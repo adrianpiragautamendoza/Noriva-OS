@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Auto Installer
+Exec=/usr/local/bin/noriva-autostart
+Hidden=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

@@ -1,0 +1,11 @@
+xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
+xserver-xorg-core xserver-xorg
+fonts-noto fonts-roboto papirus-icon-theme dmz-cursor-theme
+calamares calamares-settings-debian
+grub-efi-amd64 grub-pc-bin plymouth plymouth-themes
+firmware-linux firmware-linux-nonfree firmware-iwlwifi firmware-realtek
+firmware-amd-graphics firmware-misc-nonfree intel-microcode amd64-microcode
+bluetooth bluez
+firefox-esr thunar xfce4-terminal mousepad gnome-software
+network-manager-gnome pulseaudio pavucontrol
+xfce4-whiskermenu-plugin fastfetch curl wget git

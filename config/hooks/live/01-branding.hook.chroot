@@ -1,0 +1,12 @@
+#!/bin/sh
+cat <<ID > /etc/os-release
+PRETTY_NAME="NORIVA 1.0"
+NAME="NORIVA"
+VERSION_ID="1.0"
+ID=noriva
+ID_LIKE=debian
+HOME_URL="https://adrianfpiragauta.blogspot.com/"
+ID
+echo "NORIVA 1.0 \n \l" > /etc/issue
+sed -i 's/debian/noriva/g' /etc/hosts
+echo "noriva" > /etc/hostname

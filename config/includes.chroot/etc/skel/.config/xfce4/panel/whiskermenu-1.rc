@@ -1,0 +1,8 @@
+button-icon=/usr/share/noriva/branding/logo.svg
+button-title=Menú
+show-button-title=false
+show-button-icon=true
+launcher-show-name=true
+favorites-in-recent=true
+menu-width=450
+menu-height=500

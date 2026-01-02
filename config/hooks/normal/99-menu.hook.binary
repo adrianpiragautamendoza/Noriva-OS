@@ -1,0 +1,12 @@
+#!/bin/sh
+CFG="binary/boot/grub/grub.cfg"
+if [ -f "$CFG" ]; then
+    sed -i 's/Debian GNU\/Linux/NORIVA/g' "$CFG"
+    sed -i 's/Debian/NORIVA/g' "$CFG"
+    cat >> "$CFG" <<MENU
+menuentry "Instalar NORIVA (Grafico)" {
+    linux  /live/vmlinuz boot=live components quiet splash noriva-install findiso=${iso_path}
+    initrd /live/initrd.img
+}
+MENU
+fi

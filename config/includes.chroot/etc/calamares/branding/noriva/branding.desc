@@ -1,0 +1,24 @@
+---
+componentName:  noriva
+strings:
+    productName: "NORIVA"
+    shortProductName: "NORIVA"
+    version: "1.0"
+    shortVersion: "1.0"
+    versionedName: "NORIVA 1.0"
+    shortVersionedName: "NORIVA 1.0"
+    bootloaderEntryName: "NORIVA"
+    productUrl: "https://adrianfpiragauta.blogspot.com/"
+    supportUrl: "https://adrianfpiragauta.blogspot.com/"
+images:
+    productLogo: "logo.svg"
+    productIcon: "logo.svg"
+    productWelcome: "welcome.png"
+style:
+    sidebarBackground: "#202020"
+    sidebarText: "#FFFFFF"
+    sidebarTextSelect: "#000000"
+    sidebarTextHighlight: "#3498DB"
+slideshow: "show.qml"
+uploadServer:
+    url: ""

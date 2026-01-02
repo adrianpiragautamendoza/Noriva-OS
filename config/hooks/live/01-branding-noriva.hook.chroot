@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# 1. Definir rutas
+ASCII_SRC="/usr/share/noriva/branding/logo.ascii"
+ISSUE_FILE="/etc/issue"
+MOTD_FILE="/etc/motd"
+
+# 2. Configurar OS-Release
+cat <<EOF > /etc/os-release
+PRETTY_NAME="NORIVA 1.0"
+NAME="NORIVA"
+VERSION_ID="1.0"
+VERSION="1.0 (Stable)"
+ID=noriva
+ID_LIKE=debian
+HOME_URL="https://adrianfpiragauta.blogspot.com/"
+SUPPORT_URL="https://adrianfpiragauta.blogspot.com/"
+BUG_REPORT_URL="https://adrianfpiragauta.blogspot.com/"
+EOF
+
+# 3. Configurar Hostname
+echo "noriva" > /etc/hostname
+
+# 4. Inyectar Logo ASCII en el inicio de sesión (TTY)
+if [ -f "$ASCII_SRC" ]; then
+    # Limpiar pantalla y mostrar logo
+    echo "␛[H␛[2J" > "$ISSUE_FILE"
+    cat "$ASCII_SRC" >> "$ISSUE_FILE"
+    
+    # Añadir información técnica debajo del logo
+    echo -e "\nNORIVA 1.0 (Based on Debian Stable)" >> "$ISSUE_FILE"
+    echo -e "Kernel \r on an \m\n" >> "$ISSUE_FILE"
+    
+    # Configurar mensaje del día (lo que sale al loguearse)
+    cat "$ASCII_SRC" > "$MOTD_FILE"
+    echo -e "\nBienvenido a NORIVA. Sistema listo.\n" >> "$MOTD_FILE"
+else
+    echo "NORIVA 1.0 \n \l" > "$ISSUE_FILE"
+fi
