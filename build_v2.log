@@ -1,0 +1,210 @@
+[2026-01-02 20:56:38] lb build 
+P: live-build 20230502
+P: Building for a debian/stable/amd64 system
+[2026-01-02 20:56:38] lb bootstrap 
+P: Setting up clean exit handler
+[2026-01-02 20:56:38] lb bootstrap_cache restore
+P: Restoring bootstrap stage from cache...
+[2026-01-02 20:56:42] lb bootstrap_debootstrap 
+P: Begin bootstrapping system...
+W: Skipping bootstrap, already done
+[2026-01-02 20:56:42] lb bootstrap_cache save
+P: Saving bootstrap stage to cache...
+[2026-01-02 20:56:43] lb chroot_prep install all-except-archives
+[2026-01-02 20:56:43] lb chroot_devpts install
+P: Begin mounting /dev/pts...
+[2026-01-02 20:56:43] lb chroot_proc install
+P: Begin mounting /proc...
+[2026-01-02 20:56:43] lb chroot_selinuxfs install
+[2026-01-02 20:56:43] lb chroot_sysfs install
+P: Begin mounting /sys...
+[2026-01-02 20:56:43] lb chroot_debianchroot install
+P: Configuring file /etc/debian_chroot
+[2026-01-02 20:56:43] lb chroot_dpkg install
+P: Configuring file /sbin/start-stop-daemon
+[2026-01-02 20:56:43] lb chroot_tmpfs install
+[2026-01-02 20:56:43] lb chroot_sysv-rc install
+P: Configuring file /usr/sbin/policy-rc.d
+[2026-01-02 20:56:44] lb chroot_hosts install
+P: Configuring file /etc/hosts
+[2026-01-02 20:56:44] lb chroot_resolv install
+P: Configuring file /etc/resolv.conf
+[2026-01-02 20:56:44] lb chroot_hostname install
+P: Configuring file /etc/hostname
+P: Configuring file /bin/hostname
+[2026-01-02 20:56:44] lb chroot_apt install
+P: Configuring file /etc/apt/apt.conf
+[2026-01-02 20:56:44] lb bootstrap_archives 
+P: Configuring file /etc/apt/sources.list
+Hit:1 http://deb.debian.org/debian stable InRelease
+Get:2 http://deb.debian.org/debian stable-updates InRelease [47.3 kB]
+Get:3 http://security.debian.org stable-security InRelease [43.4 kB]
+Get:4 http://deb.debian.org/debian stable/contrib Sources [52.3 kB]
+Get:5 http://deb.debian.org/debian stable/main Sources [10.5 MB]
+Get:6 http://security.debian.org stable-security/non-free-firmware Sources [696 B]
+Get:7 http://security.debian.org stable-security/main Sources [117 kB]
+Get:8 http://security.debian.org stable-security/main amd64 Packages [94.0 kB]
+Get:9 http://security.debian.org stable-security/main Translation-en [59.1 kB]
+Get:10 http://security.debian.org stable-security/non-free-firmware amd64 Packages [544 B]
+Get:11 http://security.debian.org stable-security/non-free-firmware Translation-en [352 B]
+Get:12 http://deb.debian.org/debian stable/non-free-firmware Sources [6548 B]
+Get:13 http://deb.debian.org/debian stable/main Translation-en [6484 kB]
+Get:14 http://deb.debian.org/debian stable/contrib Translation-en [49.6 kB]
+Get:15 http://deb.debian.org/debian stable/non-free-firmware Translation-en [4704 B]
+Get:16 http://deb.debian.org/debian stable-updates/main Sources [2788 B]
+Get:17 http://deb.debian.org/debian stable-updates/main amd64 Packages [5412 B]
+Get:18 http://deb.debian.org/debian stable-updates/main Translation-en [4096 B]
+Fetched 17.5 MB in 2s (8195 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+debian-archive-keyring is already the newest version (2025.1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Hit:1 http://security.debian.org stable-security InRelease
+Hit:2 http://deb.debian.org/debian stable InRelease
+Hit:3 http://deb.debian.org/debian stable-updates InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Calculating upgrade...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Calculating upgrade...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+[2026-01-02 20:56:53] lb chroot_prep remove all-except-archives
+[2026-01-02 20:56:53] lb chroot_apt remove
+P: Deconfiguring file /etc/apt/apt.conf
+[2026-01-02 20:56:53] lb chroot_hostname remove
+P: Deconfiguring file /etc/hostname
+P: Deconfiguring file /bin/hostname
+[2026-01-02 20:56:54] lb chroot_resolv remove
+P: Deconfiguring file /etc/resolv.conf
+[2026-01-02 20:56:54] lb chroot_hosts remove
+P: Deconfiguring file /etc/hosts
+[2026-01-02 20:56:54] lb chroot_sysv-rc remove
+P: Deconfiguring file /usr/sbin/policy-rc.d
+[2026-01-02 20:56:54] lb chroot_tmpfs remove
+[2026-01-02 20:56:54] lb chroot_dpkg remove
+P: Deconfiguring file /sbin/start-stop-daemon
+[2026-01-02 20:56:54] lb chroot_debianchroot remove
+P: Deconfiguring file /etc/debian_chroot
+[2026-01-02 20:56:54] lb chroot_sysfs remove
+P: Begin unmounting /sys...
+[2026-01-02 20:56:54] lb chroot_selinuxfs remove
+[2026-01-02 20:56:54] lb chroot_proc remove
+P: Begin unmounting /proc...
+[2026-01-02 20:56:54] lb chroot_devpts remove
+P: Begin unmounting /dev/pts...
+P: Bootstrap stage completed
+P: Begin unmounting filesystems...
+P: Saving caches...
+Reading package lists...
+Building dependency tree...
+[2026-01-02 20:56:54] lb chroot 
+P: Setting up clean exit handler
+[2026-01-02 20:56:55] lb chroot_cache restore
+[2026-01-02 20:56:55] lb chroot_prep install all mode-archives-chroot
+[2026-01-02 20:56:55] lb chroot_devpts install
+P: Begin mounting /dev/pts...
+[2026-01-02 20:56:55] lb chroot_proc install
+P: Begin mounting /proc...
+[2026-01-02 20:56:55] lb chroot_selinuxfs install
+[2026-01-02 20:56:55] lb chroot_sysfs install
+P: Begin mounting /sys...
+[2026-01-02 20:56:55] lb chroot_debianchroot install
+P: Configuring file /etc/debian_chroot
+[2026-01-02 20:56:55] lb chroot_dpkg install
+P: Configuring file /sbin/start-stop-daemon
+[2026-01-02 20:56:55] lb chroot_tmpfs install
+[2026-01-02 20:56:55] lb chroot_sysv-rc install
+P: Configuring file /usr/sbin/policy-rc.d
+[2026-01-02 20:56:55] lb chroot_hosts install
+P: Configuring file /etc/hosts
+[2026-01-02 20:56:55] lb chroot_resolv install
+P: Configuring file /etc/resolv.conf
+[2026-01-02 20:56:55] lb chroot_hostname install
+P: Configuring file /etc/hostname
+P: Configuring file /bin/hostname
+[2026-01-02 20:56:55] lb chroot_apt install
+P: Configuring file /etc/apt/apt.conf
+[2026-01-02 20:56:56] lb chroot_archives chroot install
+P: Configuring file /etc/apt/sources.list
+Hit:1 http://deb.debian.org/debian stable InRelease
+Hit:2 http://security.debian.org stable-security InRelease
+Hit:3 http://deb.debian.org/debian stable-updates InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+debian-archive-keyring is already the newest version (2025.1).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Hit:1 http://deb.debian.org/debian stable InRelease
+Hit:2 http://deb.debian.org/debian stable-updates InRelease
+Hit:3 http://security.debian.org stable-security InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Calculating upgrade...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Calculating upgrade...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+[2026-01-02 20:57:03] lb chroot_linux-image 
+P: Begin scheduling kernel image installation...
+[2026-01-02 20:57:03] lb chroot_firmware 
+P: Begin scheduling firmware installation...
+[2026-01-02 20:57:06] lb chroot_preseed 
+P: Begin executing local preseeds...
+[2026-01-02 20:57:06] lb chroot_includes_before_packages 
+P: Begin copying chroot includes before packages have been installed...
+[2026-01-02 20:57:06] lb chroot_package-lists install
+P: Begin queueing installation of package lists (install pass)...
+Reading package lists...
+Building dependency tree...
+Suggested packages:
+  debtags
+The following NEW packages will be installed:
+  dctrl-tools
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 0 B/104 kB of archives.
+After this operation, 432 kB of additional disk space will be used.
+Selecting previously unselected package dctrl-tools.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7802 files and directories currently installed.)
+Preparing to unpack .../dctrl-tools_2.24-3+b1_amd64.deb ...
+Unpacking dctrl-tools (2.24-3+b1) ...
+Setting up dctrl-tools (2.24-3+b1) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be REMOVED:
+  dctrl-tools*
+0 upgraded, 0 newly installed, 1 to remove and 0 not upgraded.
+After this operation, 432 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7843 files and directories currently installed.)
+Removing dctrl-tools (2.24-3+b1) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7802 files and directories currently installed.)
+Purging configuration files for dctrl-tools (2.24-3+b1) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+[2026-01-02 20:57:12] lb chroot_install-packages install
+P: Begin installing packages (install pass)...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Package policykit-1-gnome is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+E: Package 'policykit-1-gnome' has no installation candidate
+E: An unexpected failure occurred, exiting...
+P: Begin unmounting filesystems...
+P: Saving caches...
+Reading package lists...
+Building dependency tree...
+Reading state information...

@@ -11,7 +11,7 @@ arc-theme
 # Quitamos 'calamares-settings-debian' para evitar el icono "Install Debian" duplicado
 calamares 
 # IMPORTANTE: Necesario para que el instalador pida contraseña (sudo/root)
-policykit-1-gnome 
+mate-polkit 
 
 # --- ARRANQUE Y FIRMWARE ---
 grub-efi-amd64 grub-pc-bin plymouth plymouth-themes plymouth-x11

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Configurar /etc/os-release
+# 1. Configurar /etc/os-release (Estándar moderno)
 cat <<EOF > /etc/os-release
 PRETTY_NAME="NORIVA 1.0"
 NAME="NORIVA"
@@ -12,22 +12,29 @@ SUPPORT_URL="https://adrianfpiragauta.blogspot.com/"
 BUG_REPORT_URL="https://adrianfpiragauta.blogspot.com/"
 EOF
 
-# Configurar /etc/issue y hostname
+# 2. Configurar /etc/lsb-release (Estándar antiguo, evitar errores si no existe)
+# Si existe lo editamos, si no, lo creamos desde cero.
+if [ -f /etc/lsb-release ]; then
+    sed -i 's/Debian/NORIVA/g' /etc/lsb-release
+    sed -i 's/DISTRIB_ID=Debian/DISTRIB_ID=NORIVA/g' /etc/lsb-release
+    sed -i 's/13/1.0/g' /etc/lsb-release
+else
+    echo "DISTRIB_ID=NORIVA" > /etc/lsb-release
+    echo "DISTRIB_RELEASE=1.0" >> /etc/lsb-release
+    echo "DISTRIB_DESCRIPTION=\"NORIVA 1.0\"" >> /etc/lsb-release
+    echo "DISTRIB_CODENAME=noriva" >> /etc/lsb-release
+fi
+
+# 3. Configurar Issue y Hostname
 echo "NORIVA 1.0 \n \l" > /etc/issue
 echo "noriva" > /etc/hostname
 
-# Reemplazar Debian en hosts
+# 4. Reemplazar Debian en hosts
 sed -i 's/debian/noriva/g' /etc/hosts
 
-# Asegurar que lsb-release (si se instala) diga NORIVA
-if [ -f /etc/lsb-release ]; then
-    sed -i 's/DISTRIB_ID=Debian/DISTRIB_ID=NORIVA/g' /etc/lsb-release
-    sed -i 's/DISTRIB_DESCRIPTION="Debian.*"/DISTRIB_DESCRIPTION="NORIVA 1.0"/g' /etc/lsb-release
+# 5. Branding de LightDM (Login Screen) - Ruta corregida según tu log
+# Tu imagen se copió en: /usr/share/backgrounds/noriva/noriva-background.png
+if [ -d /usr/share/images/desktop-base ]; then
+    rm -f /usr/share/images/desktop-base/login-background.svg
+    ln -sf /usr/share/backgrounds/noriva/noriva-background.png /usr/share/images/desktop-base/login-background.svg
 fi
-# Eliminar logo de Debian en LightDM si existe configuración por defecto
-rm -f /usr/share/images/desktop-base/login-background.svg
-ln -sf /usr/share/backgrounds/noriva-background.png /usr/share/images/desktop-base/login-background.svg
-
-# Intentar forzar el nombre en lsb-release otra vez
-sed -i 's/Debian/NORIVA/g' /etc/lsb-release
-sed -i 's/13/1.0/g' /etc/lsb-release
