@@ -1,4 +1,20 @@
 #!/bin/sh
+
+# 1. Habilitar arquitectura de 32 bits
 dpkg --add-architecture i386
 apt-get update
-apt-get install -y --no-install-recommends wine wine32 wine64 winetricks libwine fonts-wine zenity wine-binfmt
+
+# 2. Instalar Wine y herramientas (El apt-get install ya lo maneja live-build, 
+# pero esto asegura que winetricks y zenity estén si o si)
+apt-get install -y --no-install-recommends winetricks zenity wine-binfmt
+
+# 3. Configurar Winbind en nsswitch.conf (CRÍTICO para errores NTLM/RPC)
+# Busca la línea 'passwd: files systemd' y agrega 'winbind'
+if grep -q "passwd:.*files" /etc/nsswitch.conf; then
+    sed -i 's/^passwd:.*files systemd/passwd:         files systemd winbind/' /etc/nsswitch.conf
+    sed -i 's/^group:.*files systemd/group:          files systemd winbind/' /etc/nsswitch.conf
+fi
+
+# 4. Pre-configuración opcional de Wine (Evita algunos diálogos iniciales)
+# Crear directorio esqueleto para wine si se desea en el futuro
+mkdir -p /etc/skel/.wine

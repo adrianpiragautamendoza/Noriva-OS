@@ -1,33 +1,69 @@
 #!/bin/sh
-# Permisos Wallpaper
-chmod 644 /usr/share/backgrounds/noriva-background.png
 
-# Boot Splash (Plymouth) - Usando watermark.png
-plymouth-set-default-theme -R spinner
-IMG="/usr/share/noriva/branding/watermark.png"
-THEME="/usr/share/plymouth/themes/spinner"
-if [ -f "$IMG" ] && [ -d "$THEME" ]; then
-    cp -f "$IMG" "$THEME/watermark.png"
-    cp -f "$IMG" "$THEME/debian-logo.png"
-    update-initramfs -u
+# --- 1. FONDO DE PANTALLA (Wallpapers) ---
+# Ajustamos permisos. Nota: Usamos la ruta con la subcarpeta 'noriva' que creamos
+WALLPAPER="/usr/share/backgrounds/noriva/noriva-background.png"
+if [ -f "$WALLPAPER" ]; then
+    chmod 644 "$WALLPAPER"
 fi
 
-# Configurar Calamares Settings
-sed -i 's/branding: *default/branding: noriva/g' /etc/calamares/settings.conf
+# --- 2. BOOT SPLASH (Plymouth: Logo + Fondo Negro) ---
+IMG="/usr/share/noriva/branding/watermark.png"
+THEME_DIR="/usr/share/plymouth/themes/spinner"
 
-# Poner icono Calamares en escritorio del usuario
+# A. Reemplazar el Logo (Watermark)
+if [ -f "$IMG" ] && [ -d "$THEME_DIR" ]; then
+    echo "NORIVA: Aplicando logo en Plymouth..."
+    cp -f "$IMG" "$THEME_DIR/watermark.png"
+    # Reemplazamos también debian-logo por si acaso algún script lo llama
+    cp -f "$IMG" "$THEME_DIR/debian-logo.png"
+fi
+
+# B. Generar Fondo Negro (El truco del pixel)
+# Esto reemplaza la textura gris/azul por un negro sólido
+if [ -d "$THEME_DIR" ]; then
+    echo "NORIVA: Generando fondo negro absoluto..."
+    echo "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" | base64 -d > "$THEME_DIR/background-tile.png"
+fi
+
+# C. Aplicar tema spinner
+if [ -x /usr/sbin/plymouth-set-default-theme ]; then
+    plymouth-set-default-theme -R spinner
+fi
+
+# --- 3. CALAMARES (Instalador) ---
+# Forzar el branding en la configuración
+if [ -f /etc/calamares/settings.conf ]; then
+    sed -i 's/branding: *default/branding: noriva/g' /etc/calamares/settings.conf
+fi
+
+# Poner acceso directo en el escritorio para el usuario Live
 mkdir -p /etc/skel/Desktop
-cp /usr/share/applications/install-noriva.desktop /etc/skel/Desktop/
-chmod +x /etc/skel/Desktop/install-noriva.desktop
+if [ -f /usr/share/applications/install-noriva.desktop ]; then
+    cp /usr/share/applications/install-noriva.desktop /etc/skel/Desktop/
+    chmod +x /etc/skel/Desktop/install-noriva.desktop
+fi
 
-# Avatar de Usuario (Usa tu logo.svg)
+# --- 4. AVATAR DE USUARIO (.face) ---
 FACE="/usr/share/noriva/branding/logo.svg"
 if [ -f "$FACE" ]; then
+    # Copiar a skel para futuros usuarios
     cp "$FACE" /etc/skel/.face
     cp "$FACE" /etc/skel/.face.icon
     chmod 644 /etc/skel/.face
+    
+    # Configurar AccountsService (Icono en Login)
     mkdir -p /var/lib/AccountsService/icons
     cp "$FACE" /var/lib/AccountsService/icons/noriva
+    
+    # Configurar para el usuario 'user' (El usuario por defecto del Live CD)
     mkdir -p /var/lib/AccountsService/users
-    echo "[User]\nXSession=xfce\nIcon=/var/lib/AccountsService/icons/noriva\nSystemAccount=false" > /var/lib/AccountsService/users/noriva
+    echo "[User]\nXSession=xfce\nIcon=/var/lib/AccountsService/icons/noriva\nSystemAccount=false" > /var/lib/AccountsService/users/user
+fi
+
+# --- 5. FINALIZAR ---
+# Regenerar initramfs una sola vez al final para aplicar Plymouth
+if [ -x /usr/sbin/update-initramfs ]; then
+    echo "NORIVA: Regenerando imagen de arranque (initramfs)..."
+    update-initramfs -u
 fi
