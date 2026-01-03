@@ -1,0 +1,10 @@
+#!/bin/sh
+# Eliminar el acceso directo del instalador de Debian original
+rm -f /usr/share/applications/install-debian.desktop
+
+# Asegurar que nuestro instalador tiene permisos correctos
+chmod +x /usr/share/applications/install-noriva.desktop
+chmod +x /usr/local/bin/noriva-autostart
+
+# Limpiar archivos basura temporales de background si existen
+find /usr/share/backgrounds -name "*.slice" -delete

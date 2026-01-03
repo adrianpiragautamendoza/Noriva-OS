@@ -1,5 +1,13 @@
-#!/bin/sh
+#!/bin/bash
+
+# Si se seleccionó "Instalar" desde el GRUB (kernel cmdline contiene noriva-install)
 if grep -q "noriva-install" /proc/cmdline; then
+    # Esperar un momento a que cargue el escritorio
     sleep 5
-    sudo calamares
+    # Lanzar Calamares
+    calamares
+else
+    # Si es modo Live normal, aquí podrías lanzar un script de bienvenida
+    # Por ahora no hace nada, deja al usuario en el escritorio.
+    :
 fi

@@ -1,11 +1,39 @@
+# --- ESCRITORIO BASE ---
 xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
 xserver-xorg-core xserver-xorg
+
+# --- ESTÉTICA Y TEMAS ---
 fonts-noto fonts-roboto papirus-icon-theme dmz-cursor-theme
-calamares calamares-settings-debian
-grub-efi-amd64 grub-pc-bin plymouth plymouth-themes
+# Agregamos un tema oscuro decente por si FlatRemix no está en repositorios básicos
+arc-theme 
+
+# --- INSTALADOR ---
+# Quitamos 'calamares-settings-debian' para evitar el icono "Install Debian" duplicado
+calamares 
+# IMPORTANTE: Necesario para que el instalador pida contraseña (sudo/root)
+policykit-1-gnome 
+
+# --- ARRANQUE Y FIRMWARE ---
+grub-efi-amd64 grub-pc-bin plymouth plymouth-themes plymouth-x11
 firmware-linux firmware-linux-nonfree firmware-iwlwifi firmware-realtek
 firmware-amd-graphics firmware-misc-nonfree intel-microcode amd64-microcode
-bluetooth bluez
+
+# --- CONECTIVIDAD Y BLUETOOTH ---
+bluetooth bluez network-manager-gnome 
+
+# --- APLICACIONES ---
 firefox-esr thunar xfce4-terminal mousepad gnome-software
-network-manager-gnome pulseaudio pavucontrol
-xfce4-whiskermenu-plugin fastfetch curl wget git
+# Agregamos soporte para Flatpak (tienda de software)
+flatpak gnome-software-plugin-flatpak
+# Agregamos soporte para Papelera, USBs y Red en Thunar
+gvfs-backends 
+
+# --- MULTIMEDIA ---
+pulseaudio pavucontrol
+
+# --- EXTRAS NORIVA ---
+xfce4-whiskermenu-plugin fastfetch curl wget git htop
+
+# --- CORRECCIÓN ERRORES WINE (CRÍTICO) ---
+# Estas son las librerías que faltaban para el error NTLM y compatibilidad
+winbind libpam-winbind libnss-winbind

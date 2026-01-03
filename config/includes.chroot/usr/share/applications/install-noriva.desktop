@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Install NORIVA
-Exec=calamares
+Exec=pkexec calamares
 Icon=/etc/calamares/branding/noriva/logo.svg
 Terminal=false
 Categories=Qt;System;

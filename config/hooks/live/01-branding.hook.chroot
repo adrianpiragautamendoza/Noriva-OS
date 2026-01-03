@@ -1,12 +1,33 @@
 #!/bin/sh
-cat <<ID > /etc/os-release
+
+# Configurar /etc/os-release
+cat <<EOF > /etc/os-release
 PRETTY_NAME="NORIVA 1.0"
 NAME="NORIVA"
 VERSION_ID="1.0"
 ID=noriva
 ID_LIKE=debian
 HOME_URL="https://adrianfpiragauta.blogspot.com/"
-ID
+SUPPORT_URL="https://adrianfpiragauta.blogspot.com/"
+BUG_REPORT_URL="https://adrianfpiragauta.blogspot.com/"
+EOF
+
+# Configurar /etc/issue y hostname
 echo "NORIVA 1.0 \n \l" > /etc/issue
-sed -i 's/debian/noriva/g' /etc/hosts
 echo "noriva" > /etc/hostname
+
+# Reemplazar Debian en hosts
+sed -i 's/debian/noriva/g' /etc/hosts
+
+# Asegurar que lsb-release (si se instala) diga NORIVA
+if [ -f /etc/lsb-release ]; then
+    sed -i 's/DISTRIB_ID=Debian/DISTRIB_ID=NORIVA/g' /etc/lsb-release
+    sed -i 's/DISTRIB_DESCRIPTION="Debian.*"/DISTRIB_DESCRIPTION="NORIVA 1.0"/g' /etc/lsb-release
+fi
+# Eliminar logo de Debian en LightDM si existe configuración por defecto
+rm -f /usr/share/images/desktop-base/login-background.svg
+ln -sf /usr/share/backgrounds/noriva-background.png /usr/share/images/desktop-base/login-background.svg
+
+# Intentar forzar el nombre en lsb-release otra vez
+sed -i 's/Debian/NORIVA/g' /etc/lsb-release
+sed -i 's/13/1.0/g' /etc/lsb-release

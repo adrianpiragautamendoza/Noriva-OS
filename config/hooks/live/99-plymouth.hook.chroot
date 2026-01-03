@@ -1,0 +1,9 @@
+#!/bin/sh
+# Asegurar que Plymouth se configure al final
+if [ -x /usr/sbin/plymouth-set-default-theme ]; then
+    # Usa un tema simple por defecto si no tienes uno propio listo aún
+    plymouth-set-default-theme -R script
+fi
+
+# Forzar parámetros de boot en GRUB
+sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/g' /etc/default/grub
